@@ -1,40 +1,29 @@
 
-// ================= CONTACT FORM =================
-const form = document.getElementById("form");
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Message sent successfully!");
-  form.reset();
-});
-
-// ================= MOBILE MENU TOGGLE =================
-const toggle = document.getElementById("toggle");
-const nav = document.getElementById("nav");
-
-toggle.addEventListener("click", () => {
-  nav.classList.toggle("active");
-});
+// ================= MOBILE NAV (future ready) =================
+const nav = document.querySelector("nav");
 
 // ================= PORTFOLIO RENDER =================
-// expects data.js -> const portfolioData = [...]
+const portfolioContainer = document.querySelector(".grid-3");
 
-const portfolio = document.getElementById("portfolio");
+function renderPortfolio() {
+  if (!portfolioContainer) return;
 
-if (typeof portfolioData !== "undefined") {
   portfolioData.forEach(item => {
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.className = "portfolio-card";
+    card.style.background = `linear-gradient(135deg, ${item.color}, #111)`;
 
     card.innerHTML = `
-      <img src="${item.image}" alt="${item.title}" style="width:100%; border-radius:12px;">
-      <h3>${item.title}</h3>
-      <p>${item.description}</p>
+      <div>
+        <h3>${item.title}</h3>
+        <p style="font-size: 0.85rem; opacity: 0.8;">${item.description}</p>
+      </div>
     `;
 
-    portfolio.appendChild(card);
+    portfolioContainer.appendChild(card);
   });
 }
 
-
-
+// ================= INIT =================
+document.addEventListener("DOMContentLoaded", renderPortfolio);
